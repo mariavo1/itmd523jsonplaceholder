@@ -24,10 +24,10 @@ export default function Index() {
       setIsLoading(true);
 
       try {
-        const response = await fetch(`${BASE_URL}/posts?page=${page}`, {
+        const res = await fetch(`${BASE_URL}/posts?page=${page}`, {
           signal: abortController.current?.signal,
         });
-        const posts = (await response.json()) as Post[];
+        const posts = (await res.json()) as Post[];
         setPosts(posts);
       } catch (e: any) {
         if (e.name === "AbortError") {
@@ -54,7 +54,7 @@ export default function Index() {
       <div className="flex items-center justify-center">
         <button className="mb-10 text-2xl bg-orange-100 rounded-full px-5 py-3 cursor-pointer" onClick={() => setPage(page + 1)}>Click to Increase Page ({page})</button>
       </div>
-      {isLoading && <div>Loading...</div>}
+      {isLoading && <div>Data is loading</div>}
       {!isLoading && (
         <ul>
           {posts.map((post) => {
